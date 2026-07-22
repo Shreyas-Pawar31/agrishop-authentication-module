@@ -1,0 +1,220 @@
+:root {
+  --green-dark: #2d5016;
+  --green-primary: #4a7c2f;
+  --green-light: #7cb342;
+  --cream: #f5f1e8;
+  --white: #ffffff;
+  --text-dark: #2b2b2b;
+  --error: #c0392b;
+  --border: #d4cfc0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--cream);
+  color: var(--text-dark);
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(45, 80, 22, 0.12);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-card h2 {
+  color: var(--green-dark);
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.auth-field {
+  margin-bottom: 16px;
+}
+
+.auth-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
+
+.auth-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--green-primary);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--green-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover:not(:disabled) {
+  background-color: var(--green-dark);
+}
+
+.auth-button:disabled {
+  background-color: #a8a8a8;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.auth-message.error {
+  color: var(--error);
+}
+
+.auth-link-row {
+  margin-top: 16px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.auth-link-row a {
+  color: var(--green-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link-row a:hover {
+  text-decoration: underline;
+}
+
+.splash-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+  color: white;
+}
+
+.splash-screen h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+  animation: fadeIn 1s ease-out;
+}
+
+.splash-screen p {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.dashboard-placeholder {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cream);
+}
+
+.dashboard-placeholder h1 {
+  color: var(--green-dark);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 40px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  color: var(--green-dark);
+}
+
+.dashboard-page {
+  min-height: 100vh;
+  background-color: var(--cream);
+  position: relative;
+}
+
+.dashboard-logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: auto;
+  padding: 10px 20px;
+}
+
+.dashboard-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.dashboard-content h1 {
+  color: var(--green-dark);
+}
