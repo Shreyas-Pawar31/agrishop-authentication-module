@@ -64,16 +64,6 @@ Routes are protected via ProtectedRoute.jsx, which checks both session validity 
 3. Run the dev server:
    npm run dev
 
-## Known Limitation: Email Delivery Restricted to One Address
+## Email Delivery
 
-Supabase's own default email service is heavily restricted — it only sends a very small number of emails per hour, and only to addresses associated with the project's own team. This makes it unusable for testing signup/OTP/password-reset flows with real, arbitrary user emails. To work around this, this project uses Resend as a custom SMTP provider, connected directly to Supabase's Auth settings.
-
-However, Resend's free tier has its own restriction: until a custom domain is verified with Resend, all outgoing emails can only be sent from Resend's shared testing address (onboarding@resend.dev), and — critically — that testing address is only allowed to deliver mail to the single email address that was used to create the Resend account itself. Any signup attempt using a different email address will fail silently on the backend (visible as a 500 error in Supabase's Auth logs, and a 403 "testing domain restriction" error in Resend's own logs).
-
-Practically, this means: during development and testing, all Sign Up, OTP Verification, and Forgot Password flows must use the exact email address that was used to create the project's Resend account. Using any other email address will not deliver the OTP code or reset link.
-
-To lift this restriction for production use (so any customer can sign up with any email), a real domain needs to be verified in Resend under Domains → Add Domain, which involves adding DNS records (SPF/DKIM) to a domain the team owns. This was outside the scope of this module's initial build and is noted here as a follow-up task for whoever manages deployment.
-
-
-
-Note: The Resend account for this project is currently registered under shreyaszcoer@gmail.com. Any testing of Sign Up, OTP Verification, or Forgot Password must use this exact email address to receive the verification code or reset link. (Only the email address is shared here — inbox access is not, so testing requires the original developer to check for and relay the code.)
+Email delivery (OTP verification, password reset) is handled via Gmail SMTP using an App Password. This allows the app to send emails to any user's address — no restrictions on which email addresses can sign up or receive codes.
