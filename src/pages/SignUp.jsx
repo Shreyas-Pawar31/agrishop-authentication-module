@@ -1,3 +1,4 @@
+import { validatePassword } from '../utils/validatePassword'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
@@ -13,6 +14,13 @@ function SignUp() {
 
   const handleSignUp = async (e) => {
     e.preventDefault()
+
+    const passwordErrors = validatePassword(password)
+    if (passwordErrors.length > 0) {
+      setMessage(`Error: Password must contain ${passwordErrors.join(', ')}`)
+      return
+    }
+
     setLoading(true)
     setMessage('')
 
@@ -69,7 +77,7 @@ function SignUp() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
               />
               <button
                 type="button"
@@ -89,6 +97,9 @@ function SignUp() {
                 )}
               </button>
             </div>
+            <p style={{ fontSize: '12px', color: 'var(--green-dark)', marginTop: '4px' }}>
+              Must contain a minimum of 8 characters with atleast 1 uppercase, lowercase, number, and special character
+            </p>
           </div>
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? 'Creating account...' : 'Sign Up'}

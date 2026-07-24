@@ -1,3 +1,4 @@
+import { validatePassword } from '../utils/validatePassword'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
@@ -11,6 +12,13 @@ function ResetPassword() {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
+
+    const passwordErrors = validatePassword(password)
+    if (passwordErrors.length > 0) {
+      setMessage(`Error: Password must contain ${passwordErrors.join(', ')}`)
+      return
+    }
+
     setLoading(true)
     setMessage('')
 
@@ -39,7 +47,7 @@ function ResetPassword() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
               />
               <button
                 type="button"
@@ -59,6 +67,9 @@ function ResetPassword() {
                 )}
               </button>
             </div>
+            <p style={{ fontSize: '12px', color: 'var(--green-dark)', marginTop: '4px' }}>
+              Must be 8+ characters with uppercase, lowercase, number, and symbol
+            </p>
           </div>
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? 'Updating...' : 'Update Password'}
